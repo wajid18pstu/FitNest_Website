@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +34,7 @@ header('location:../index.php');
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->
-<!-- Visit codeastro.com for more projects -->
+
 <!--sidebar-menu-->
 <?php $page='staff-management'; include 'includes/sidebar.php'?>
 <!--sidebar-menu-->

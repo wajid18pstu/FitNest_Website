@@ -25,7 +25,7 @@ header('location:../index.php');
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">Perfect Gym</a></h1>
+  <h1><a href="dashboard.html">FitNest System</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -75,17 +75,17 @@ while($row=mysqli_fetch_array($result)){
                       <td><img src="../img/gym-logo.png" alt="Gym Logo" width="175"></td>
                     </tr>
                     <tr>
-                      <td><h4>Perfect GYM Club</h4></td>
+                      <td><h4>FitNest System</h4></td>
                     </tr>
                     <tr>
-                      <td>5021  Wetzel Lane, Williamsburg</td>
+                      <td>Dhaka,Bangladesh</td>
                     </tr>
                     
                     <tr>
-                      <td>Tel: 231-267-6011</td>
+                      <td>Tel:+8801812807586</td>
                     </tr>
                     <tr>
-                      <td >Email: support@perfectgym.com</td>
+                      <td >Email: shafayat18@cse.pstu.ac.bd</td>
                     </tr>
                   </tbody>
                 </table>

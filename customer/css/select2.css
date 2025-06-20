@@ -1,6 +1,4 @@
-/*
-Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
-*/
+
 .select2-container {
     position: relative;
     display: inline-block;
@@ -14,12 +12,7 @@ Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
 .select2-drop,
 .select2-search,
 .select2-search input{
-  /*
-    Force border-box so that % widths fit the parent
-    container without overlap because of margin/padding.
 
-    More Info : http://www.quirksmode.org/css/box.html
-  */
   -moz-box-sizing: border-box;    /* firefox */
   -ms-box-sizing: border-box;     /* ie */
   -webkit-box-sizing: border-box; /* webkit */
@@ -285,20 +278,7 @@ Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
   display: list-item;
 }
 
-/*
-disabled look for already selected choices in the results dropdown
-.select2-results .select2-disabled.select2-highlighted {
-    color: #666;
-    background: #f4f4f4;
-    display: list-item;
-    cursor: default;
-}
-.select2-results .select2-disabled {
-  background: #f4f4f4;
-  display: list-item;
-  cursor: default;
-}
-*/
+
 .select2-results .select2-disabled {
     display: none;
 }

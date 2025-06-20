@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +67,7 @@ header('location:../index.php');
           </div>
           
           <div class='widget-content nopadding'>
-	  <!-- Visit codeastro.com for more projects -->
+	  
 	  <?php
 
       include "dbcon.php";

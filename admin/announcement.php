@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,7 @@ header('location:../index.php');
 </div>
 <!--close-Header-part--> 
 
-<!-- Visit codeastro.com for more projects -->
+
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->

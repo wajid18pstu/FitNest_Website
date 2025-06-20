@@ -12,7 +12,7 @@ $result3=mysqli_query($con,$qry);
 $qry="SELECT designation, count(*) as snumber FROM staffs GROUP BY designation";
 $result5=mysqli_query($con,$qry);
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -56,7 +56,7 @@ $result5=mysqli_query($con,$qry);
                 chart.draw(data, options);  
            }  
            </script>
-<!-- Visit codeastro.com for more projects -->
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -230,7 +230,7 @@ $result5=mysqli_query($con,$qry);
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->
 
-<!-- Visit codeastro.com for more projects -->
+
 <!--sidebar-menu-->
   <?php $page='dashboard'; include 'includes/sidebar.php'?>
 <!--sidebar-menu-->
@@ -258,7 +258,7 @@ $result5=mysqli_query($con,$qry);
         <li class="bg_lb span2"> <a href="interface.html"> <i class="fas fa-pencil"></i>Elements</a> </li> -->
         <!-- <li class="bg_lg"> <a href="calendar.html"> <i class="fas fa-calendar"></i> Calendar</a> </li>
         <li class="bg_lr"> <a href="error404.html"> <i class="fas fa-info-sign"></i> Error</a> </li> -->
-<!-- Visit codeastro.com for more projects -->
+
       </ul>
     </div>
 <!--End-Action boxes-->    
@@ -287,7 +287,7 @@ $result5=mysqli_query($con,$qry);
             </div>
           </div>
         </div>
-      </div><!-- Visit codeastro.com for more projects -->
+      </div>
     </div><!-- End of row-fluid -->
 
     <div class="row-fluid">
@@ -338,7 +338,7 @@ $result5=mysqli_query($con,$qry);
       </div>
       </div>
 	
-<!--End-Chart-box--> <!-- Visit codeastro.com for more projects -->
+<!--End-Chart-box--> 
     <!-- <hr/> -->
     <div class="row-fluid">
       <div class="span6">
@@ -372,7 +372,7 @@ $result5=mysqli_query($con,$qry);
               </li>
             </ul>
           </div>
-        </div><!-- Visit codeastro.com for more projects -->
+        </div>
        
          
       </div>
@@ -435,7 +435,7 @@ $result5=mysqli_query($con,$qry);
 
 <!--end-Footer-part-->
 
-<script src="../js/excanvas.min.js"></script> <!-- Visit codeastro.com for more projects -->
+<script src="../js/excanvas.min.js"></script> 
 <script src="../js/jquery.min.js"></script> 
 <script src="../js/jquery.ui.custom.js"></script> 
 <script src="../js/bootstrap.min.js"></script> 

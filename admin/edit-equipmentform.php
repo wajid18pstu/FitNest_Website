@@ -4,7 +4,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +28,7 @@ header('location:../index.php');
   <h1><a href="dashboard.html">Perfect Gym Admin</a></h1>
 </div>
 <!--close-Header-part--> 
-<!-- Visit codeastro.com for more projects -->
+
 
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
@@ -50,7 +50,7 @@ header('location:../index.php');
         $result=mysqli_query($conn,$qry);
         while($row=mysqli_fetch_array($result)){
     ?> 
-<!-- Visit codeastro.com for more projects -->
+
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Equipments</a> <a href="#" class="current">Edit Equipments</a> </div>
@@ -167,7 +167,7 @@ header('location:../index.php');
                   </div>
               </div>
             </div>
-            <!-- Visit codeastro.com for more projects -->
+            
           
             
             <div class="form-actions text-center">
@@ -205,7 +205,6 @@ header('location:../index.php');
 </div>
 
 
-<!-- Visit codeastro.com for more projects -->
 <!--end-Footer-part-->
 
 <script src="../js/excanvas.min.js"></script> 

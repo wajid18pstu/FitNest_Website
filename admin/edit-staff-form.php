@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,7 @@ header('location:../index.php');
 </div>
 <!--close-Header-part--> 
 
-<!-- Visit codeastro.com for more projects -->
+
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->
@@ -102,7 +102,7 @@ while($row=mysqli_fetch_array($result)){
         
         <div class="widget-content nopadding">
           <div class="form-horizontal">
-          <!-- Visit codeastro.com for more projects -->
+          
         </div>
         <div class="widget-content nopadding">
           
@@ -152,7 +152,7 @@ while($row=mysqli_fetch_array($result)){
           </div>
 
            
-<!-- Visit codeastro.com for more projects -->
+
             <div class="form-actions text-center">
              <!-- user's ID is hidden here --><!-- Visit codeastro.com for more projects -->
              <input type="hidden" name="id" value="<?php echo $row['user_id'];?>">
@@ -180,7 +180,7 @@ while($row=mysqli_fetch_array($result)){
   </div>
 </div>
 
-<!-- Visit codeastro.com for more projects -->
+
 <!--end-main-container-part-->
 
 <!--Footer-part-->

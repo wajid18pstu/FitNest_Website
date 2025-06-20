@@ -25,7 +25,7 @@ header('location:../index.php');
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.php">Perfect Gym</a></h1>
+  <h1><a href="dashboard.php">FitNest System</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -103,7 +103,7 @@ header('location:../index.php');
                                                     <table class="invoice">
                                                         <tbody>
                                                         <tr>
-                                                            <td><div style="float:left">Invoice #GMS_<?php echo(rand(100000,10000000));?> <br> 5021  Wetzel Lane, <br>Williamsburg </div><div style="float:right"> Last Payment: <?php echo $paid_date?></div></td>
+                                                            <td><div style="float:left">Invoice #GMS_<?php echo(rand(100000,10000000));?> <br> Dhaka, <br>Bangladesh </div><div style="float:right"> Last Payment: <?php echo $paid_date?></div></td>
                                                         </tr>
 
                                                         <tr>

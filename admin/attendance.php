@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@ header('location:../index.php');
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<!-- Visit codeastro.com for more projects -->
+
 <!--Header-part-->
 <div id="header">
   <h1><a href="dashboard.html">Perfect Gym Admin</a></h1>
@@ -40,7 +40,7 @@ header('location:../index.php');
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-<!-- Visit codeastro.com for more projects -->
+
 <!--sidebar-menu-->
 <?php $page="attendance"; include 'includes/sidebar.php'?>
 <!--sidebar-menu-->

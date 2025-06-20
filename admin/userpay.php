@@ -28,10 +28,7 @@ header('location:../index.php');
 <div id="header">
   <h1><a href="dashboard.html">FitNest Admin</a></h1>
 </div>
-<!--close-Header-part--> 
 
-<!-- Visit codeastro.com for more projects -->
-<!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->

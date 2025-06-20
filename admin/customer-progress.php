@@ -40,7 +40,6 @@ header('location:../index.php');
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-<!-- Visit codeastro.com for more projects -->
 <!--sidebar-menu-->
 <?php $page='manage-customer-progress'; include 'includes/sidebar.php'?>
 <!--sidebar-menu-->

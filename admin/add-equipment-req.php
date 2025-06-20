@@ -4,7 +4,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,20 +27,10 @@ header('location:../index.php');
 <div id="header">
   <h1><a href="dashboard.html">Perfect Gym Admin</a></h1>
 </div>
-<!--close-Header-part--> 
-<!-- Visit codeastro.com for more projects -->
 
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
-<!--close-top-Header-menu-->
-<!--start-top-serch-->
-<!-- <div id="search">
-  <input type="hidden" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="fa-search fa-white"></i></button>
-</div> -->
-<!--close-top-serch-->
 
-<!--sidebar-menu-->
 <?php $page='add-equip'; include 'includes/sidebar.php'?>
 
 
@@ -119,7 +109,7 @@ if(!$result){
 
 ?>
                                     
-      <!-- Visit codeastro.com for more projects -->                          
+                       
                                         
                 
                                     </form>
@@ -142,7 +132,7 @@ if(!$result){
 </style>
 
 <!--end-Footer-part-->
-<!-- Visit codeastro.com for more projects -->
+
 <script src="../js/excanvas.min.js"></script> 
 <script src="../js/jquery.min.js"></script> 
 <script src="../js/jquery.ui.custom.js"></script> 

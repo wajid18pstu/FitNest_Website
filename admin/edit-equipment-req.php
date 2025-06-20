@@ -4,7 +4,7 @@
       header('location:../index.php');	
     }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +39,6 @@
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-<!-- Visit codeastro.com for more projects -->
 <!--sidebar-menu-->
 <?php $page='update-equip'; include 'includes/sidebar.php'?>
 
@@ -111,7 +110,7 @@
                     echo"</div>";
                     echo"</div>";
                 echo"</div>";
-                // <!-- Visit codeastro.com for more projects -->
+                
             }
 
             }else{
@@ -126,7 +125,7 @@
 </div>
 
 <!--end-main-container-part-->
-<!-- Visit codeastro.com for more projects -->
+
 <!--Footer-part-->
 
 <div class="row-fluid">

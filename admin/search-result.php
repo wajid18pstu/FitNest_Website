@@ -121,8 +121,7 @@ header('location:../index.php');
   </div>
 </div>
 
-<!--end-main-container-part-->
-<!-- Visit codeastro.com for more projects -->
+
 <!--Footer-part-->
 
 <div class="row-fluid">

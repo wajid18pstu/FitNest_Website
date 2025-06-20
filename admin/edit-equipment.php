@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!-- Visit codeastro.com for more projects -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,7 @@ header('location:../index.php');
 </div>
 <!--close-Header-part--> 
 
-<!-- Visit codeastro.com for more projects -->
+
 <!--top-Header-menu-->
 <?php include 'includes/topheader.php'?>
 <!--close-top-Header-menu-->
@@ -84,7 +84,7 @@ header('location:../index.php');
                   <th>Action</th>
                 </tr>
               </thead>";
-              // <!-- Visit codeastro.com for more projects -->
+           
             while($row=mysqli_fetch_array($result)){
             
             echo"<tbody> 
@@ -129,8 +129,7 @@ header('location:../index.php');
 }
 </style>
 
-<!--end-Footer-part-->
-<!-- Visit codeastro.com for more projects -->
+
 <script src="../js/excanvas.min.js"></script> 
 <script src="../js/jquery.min.js"></script> 
 <script src="../js/jquery.ui.custom.js"></script> 
