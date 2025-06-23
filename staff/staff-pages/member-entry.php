@@ -141,7 +141,7 @@ header('location:../index.php');
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
                 <input type="number" id="mask-phone" name="contact" class="span8 mask text">
-                <span class="help-block blue span8">(999) 999-9999</span> 
+                <span class="help-block blue span8">+8801812807586</span> 
                 </div>
             </div>
             <div class="control-group">
@@ -150,8 +150,43 @@ header('location:../index.php');
                 <input type="text" class="span11" name="address" placeholder="Address" />
               </div>
             </div>
-          </div>
-
+            <!-- BMI Calculator Section START -->
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+              <h5>BMI Calculator</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <div class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label">Weight</label>
+                  <div class="controls">
+                    <input type="number" step="any" min="1" id="weight" name="weight" class="span5" placeholder="Weight" required>
+                    <select id="weight_unit" class="span3">
+                      <option value="kg">kg</option>
+                      <option value="lbs">lbs</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Height</label>
+                  <div class="controls">
+                    <input type="number" step="any" min="0" id="height_ft" class="span2" placeholder="Feet" required>
+                    <input type="number" step="any" min="0" id="height_in" class="span2" placeholder="Inch" required>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">BMI</label>
+                  <div class="controls">
+                    <input type="text" id="bmi_result" class="span5" readonly>
+                    <span id="bmi_category" class="help-block blue span8"></span>
+                  </div>
+                </div>
+                <div class="form-actions text-center">
+                  <button type="button" class="btn btn-info" onclick="calculateBMI()">Calculate BMI</button>
+                </div>
+              </div>
+            </div>
+            <!-- BMI Calculator Section END -->
+            
               <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Service Details</h5>
         </div>
@@ -163,13 +198,13 @@ header('location:../index.php');
               <label class="control-label">Services</label>
               <div class="controls">
                 <label>
-                  <input type="radio" value="Fitness" name="services" />
+                  <input type="radio" value="Fitness" name="services" id="service_fitness" />
                   Fitness</label>
                 <label>
-                  <input type="radio" value="Sauna" name="services" />
+                  <input type="radio" value="Sauna" name="services" id="service_sauna" />
                   Sauna</label>
                 <label>
-                  <input type="radio" value="Cardio" name="services" />
+                  <input type="radio" value="Cardio" name="services" id="service_cardio" />
                   Cardio</label>
               </div>
             </div>
@@ -178,7 +213,7 @@ header('location:../index.php');
               <label class="control-label">Total Amount</label>
               <div class="controls">
                 <div class="input-append">
-                  <span class="add-on">$</span> 
+                  <span class="add-on">Tk </span> 
                   <input type="number" placeholder="500" name="amount" class="span11">
                   </div>
               </div>
@@ -267,6 +302,55 @@ header('location:../index.php');
 // resets the menu selection upon entry to this page:
 function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
+}
+</script>
+<script>
+function calculateBMI() {
+    let weight = parseFloat(document.getElementById('weight').value);
+    let weightUnit = document.getElementById('weight_unit').value;
+    let heightFt = parseFloat(document.getElementById('height_ft').value);
+    let heightIn = parseFloat(document.getElementById('height_in').value);
+
+    if (isNaN(weight) || isNaN(heightFt) || isNaN(heightIn) || (heightFt === 0 && heightIn === 0)) {
+        document.getElementById('bmi_result').value = '';
+        document.getElementById('bmi_category').innerText = 'Please enter valid weight and height.';
+        return;
+    }
+
+    // Convert weight to kg if needed
+    if (weightUnit === 'lbs') {
+        weight = weight * 0.453592;
+    }
+
+    // Convert height to meters
+    let totalInches = (heightFt * 12) + heightIn;
+    let heightM = totalInches * 0.0254;
+
+    let bmi = weight / (heightM * heightM);
+    let bmiRounded = bmi.toFixed(2);
+    document.getElementById('bmi_result').value = bmiRounded;
+
+    // Determine BMI category and auto-select service
+    let category = '';
+    let suggestion = '';
+    if (bmi < 18.5) {
+        category = 'Underweight';
+        suggestion = 'Fitness';
+        document.getElementById('service_fitness').checked = true;
+    } else if (bmi < 25) {
+        category = 'Normal weight';
+        suggestion = 'Sauna';
+        document.getElementById('service_sauna').checked = true;
+    } else if (bmi < 30) {
+        category = 'Overweight';
+        suggestion = 'Cardio';
+        document.getElementById('service_cardio').checked = true;
+    } else {
+        category = 'Obesity';
+        suggestion = 'Cardio';
+        document.getElementById('service_cardio').checked = true;
+    }
+    document.getElementById('bmi_category').innerText = category + ' (Suggested program: ' + suggestion + ')';
 }
 </script>
 </body>

@@ -156,7 +156,7 @@ while($row=mysqli_fetch_array($result)){
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
                 <input type="number" id="mask-phone" name="contact" value='<?php echo $row['contact']; ?>' class="span8 mask text">
-                <span class="help-block blue span8">(999) 999-9999</span> 
+                <span class="help-block blue span8">+8801812807586</span> 
                 </div>
             </div>
             <div class="control-group">
@@ -179,13 +179,13 @@ while($row=mysqli_fetch_array($result)){
               <div class="controls">
                 <label>
                   <input type="radio" value="Fitness" name="services" />
-                  Fitness <small>- $55 per month</small></label>
+                  Fitness <small>- Tk 1000 per month</small></label>
                 <label>
                   <input type="radio" value="Sauna" name="services" />
-                  Sauna <small>- $35 per month</small></label>
+                  Sauna <small>- Tk 1000 per month</small></label>
                 <label>
                   <input type="radio" value="Cardio" name="services" />
-                  Cardio <small>- $40 per month</small></label>
+                  Cardio <small>- Tk 1000 per month</small></label>
               </div>
             </div>
 
@@ -193,7 +193,7 @@ while($row=mysqli_fetch_array($result)){
               <label class="control-label">Total Amount</label>
               <div class="controls">
                 <div class="input-append">
-                  <span class="add-on">$</span> 
+                  <span class="add-on">Tk </span> 
                   <input type="number" value='<?php echo $row['amount']; ?>' name="amount" class="span11">
                   </div>
               </div>

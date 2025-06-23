@@ -71,14 +71,54 @@
                     }
             ?>
             <div class="pull-left">
-            <a href="customer/index.php"><h6>User Login</h6></a>
+            <a href="customer/index.php"><h6>Customer Login</h6></a>
             </div>
 
             <div class="pull-right">
-            <a href="staff/index.php"><h6>Members Login</h6></a>
+            <a href="staff/index.php"><h6>Staff Login</h6></a>
             </div>
             
         </div>
+        
+        <!-- Compact login form styles -->
+<style>
+#loginbox {
+    margin: 40px auto 0 auto !important;
+    padding: 1px 18px !important;
+    max-width: 340px;
+    min-height: unset !important;
+    height: auto !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+#loginbox h3 img {
+    max-height: 180px;
+    margin-bottom: 2px;
+}
+.control-group {
+    margin-bottom: 5px !important;
+}
+.main_input_box input {
+    padding: 8px 10px !important;
+    height: 22px !important;
+}
+.form-actions {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+}
+.btn-large {
+    padding: 8px 0 !important;
+    font-size: 16px !important;
+}
+.pull-left, .pull-right {
+    margin-top: 10px !important;
+}
+.alert {
+    margin: 10px 0 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+}
+</style>
         
         <script src="js/jquery.min.js"></script>  
         <script src="js/matrix.login.js"></script> 

@@ -139,7 +139,7 @@ header('location:../index.php');
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
                 <input type="text" id="mask-phone" name="contact" minlength="10" maxlength="10" class="span8 mask text" required>
-                <span class="help-block blue span8">(999) 999-9999</span> 
+                <span class="help-block blue span8">+8801812807586</span> 
                 </div>
             </div>
 
@@ -158,7 +158,7 @@ header('location:../index.php');
               <label class="control-label">Cost Per Item: </label>
               <div class="controls">
                 <div class="input-append">
-                  <span class="add-on">$</span> 
+                  <span class="add-on">Tk </span> 
                   <input type="number" placeholder="269" name="amount" class="span11" required>
                   </div>
               </div>

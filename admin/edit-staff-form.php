@@ -125,7 +125,7 @@ while($row=mysqli_fetch_array($result)){
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
                 <input type="number" id="mask-phone" name="contact" value='<?php echo $row['contact']; ?>' class="span8 mask text">
-                <span class="help-block blue span8">(999) 999-9999</span> 
+                <span class="help-block blue span8">+8801812807586</span> 
                 </div>
             </div>
             <div class="control-group">

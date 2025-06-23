@@ -24,7 +24,7 @@ header('location:../index.php');
 </head>
 <body>
 
-<!--Header-part--><!-- Visit codeastro.com for more projects -->
+<!--Header-part-->
 <div id="header">
   <h1><a href="dashboard.html">Perfect Gym Admin</a></h1>
 </div>
@@ -45,6 +45,7 @@ header('location:../index.php');
 <?php $page='members-entry'; include 'includes/sidebar.php'?>
 <!--sidebar-menu-->
 <div id="content">
+<div id="content-header">
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Members</a> <a href="#" class="current">Add Members</a> </div>
   <h1>Member Entry Form</h1>
@@ -94,8 +95,6 @@ header('location:../index.php');
                 <input type="date" name="dor" class="span11" />
                 <span class="help-block">Date of registration</span> </div>
             </div>
-            
-          
         </div>
      
         
@@ -146,8 +145,8 @@ header('location:../index.php');
             <div class="control-group">
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
-                <input type="number" id="mask-phone" name="contact" placeholder="9876543210" class="span8 mask text">
-                <span class="help-block blue span8">(999) 999-9999</span> 
+                <input type="number" id="mask-phone" name="contact" placeholder="+8801812807586" class="span8 mask text">
+                <span class="help-block blue span8">+8801812807586</span> 
                 </div>
             </div>
             <div class="control-group">
@@ -156,8 +155,42 @@ header('location:../index.php');
                 <input type="text" class="span11" name="address" placeholder="Address" />
               </div>
             </div>
-          </div>
-
+            <!-- BMI Calculator Section START -->
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+              <h5>BMI Calculator</h5>
+            </div>
+            <div class="widget-content nopadding">
+              <div class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label">Weight</label>
+                  <div class="controls">
+                    <input type="number" step="any" min="1" id="weight" name="weight" class="span5" placeholder="Weight" required>
+                    <select id="weight_unit" class="span3">
+                      <option value="kg">kg</option>
+                      <option value="lbs">lbs</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Height</label>
+                  <div class="controls">
+                    <input type="number" step="any" min="0" id="height_ft" class="span2" placeholder="Feet" required>
+                    <input type="number" step="any" min="0" id="height_in" class="span2" placeholder="Inch" required>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">BMI</label>
+                  <div class="controls">
+                    <input type="text" id="bmi_result" class="span5" readonly>
+                    <span id="bmi_category" class="help-block blue span8"></span>
+                  </div>
+                </div>
+                <div class="form-actions text-center">
+                  <button type="button" class="btn btn-info" onclick="calculateBMI()">Calculate BMI</button>
+                </div>
+              </div>
+            </div>
+            <!-- BMI Calculator Section END -->
               <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
           <h5>Service Details</h5>
         </div>
@@ -167,16 +200,16 @@ header('location:../index.php');
             
             <div class="control-group">
               <label class="control-label">Services</label>
-              <div class="controls">
+              <div class="controls" id="service-options">
                 <label>
                   <input type="radio" value="Fitness" name="services" />
-                  Fitness <small>- $55 per month</small></label>
+                  Fitness <small>- Tk 1000 per month</small></label>
                 <label>
                   <input type="radio" value="Sauna" name="services" />
-                  Sauna <small>- $35 per month</small></label>
+                  Sauna <small>- Tk 1000 per month</small></label>
                 <label>
                   <input type="radio" value="Cardio" name="services" />
-                  Cardio <small>- $40 per month</small></label>
+                  Cardio <small>- Tk 1000 per month</small></label>
               </div>
             </div>
 
@@ -184,7 +217,9 @@ header('location:../index.php');
               <label class="control-label">Total Amount</label>
               <div class="controls">
                 <div class="input-append">
-                  <span class="add-on">$</span> 
+                  <span class="add-on">Tk 
+
+                  </span> 
                   <input type="number" placeholder="50" name="amount" class="span11">
                   </div>
               </div>
@@ -274,6 +309,58 @@ header('location:../index.php');
 function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
+</script>
+<script>
+  function calculateBMI() {
+    var weight = parseFloat(document.getElementById('weight').value);
+    var weightUnit = document.getElementById('weight_unit').value;
+    var heightFt = parseFloat(document.getElementById('height_ft').value);
+    var heightIn = parseFloat(document.getElementById('height_in').value);
+    var bmiResult = document.getElementById('bmi_result');
+    var bmiCategory = document.getElementById('bmi_category');
+
+    if (isNaN(weight) || isNaN(heightFt) || isNaN(heightIn) || (heightFt === 0 && heightIn === 0)) {
+      bmiResult.value = '';
+      bmiCategory.innerHTML = '';
+      return;
+    }
+
+    // Convert weight to kg if needed
+    if (weightUnit === 'lbs') {
+      weight = weight * 0.453592;
+    }
+
+    // Convert height to meters
+    var totalHeightInInches = (heightFt * 12) + heightIn;
+    var heightM = totalHeightInInches * 0.0254;
+    var bmi = weight / (heightM * heightM);
+    bmiResult.value = bmi.toFixed(2);
+
+    // Determine BMI category and auto-select service
+    if (bmi < 18.5) {
+      bmiCategory.innerHTML = "Underweight (Suggested program: Fitness)";
+      selectService("Fitness");
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+      bmiCategory.innerHTML = "Normal weight (Suggested program: Sauna)";
+      selectService("Sauna");
+    } else if (bmi >= 25 && bmi < 29.9) {
+      bmiCategory.innerHTML = "Overweight (Suggested program: Cardio)";
+      selectService("Cardio");
+    } else {
+      bmiCategory.innerHTML = "Obesity (Suggested program: Cardio)";
+      selectService("Cardio");
+    }
+  }
+
+  function selectService(serviceValue) {
+    var serviceOptions = document.getElementsByName('services');
+    for (var i = 0; i < serviceOptions.length; i++) {
+      serviceOptions[i].checked = false;
+      if (serviceOptions[i].value === serviceValue) {
+        serviceOptions[i].checked = true;
+      }
+    }
+  }
 </script>
 </body>
 </html>

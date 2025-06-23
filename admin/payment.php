@@ -107,7 +107,7 @@ header('location:../index.php');
                 <td><div class='text-center'><?php echo $row['fullname']?></div></td>
                 <td><div class='text-center'><?php echo($row['paid_date'] == 0 ? "New Member" : $row['paid_date'])?></div></td>
                 
-                <td><div class='text-center'><?php echo '$'.$row['amount']?></div></td>
+                <td><div class='text-center'><?php echo 'Tk '.$row['amount']?></div></td>
                 <td><div class='text-center'><?php echo $row['services']?></div></td>
                 <td><div class='text-center'><?php echo $row['plan']." Month/s"?></div></td>
                 <td><div class='text-center'><a href='user-payment.php?id=<?php echo $row['user_id']?>'><button class='btn btn-success btn'><i class='fas fa-dollar-sign'></i> Make Payment</button></a></div></td>

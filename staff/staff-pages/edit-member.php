@@ -97,7 +97,7 @@ header('location:../index.php');
                 <td><div class='text-center'>".$row['contact']."</div></td>
                 <td><div class='text-center'>".$row['dor']."</div></td>
                 <td><div class='text-center'>".$row['address']."</div></td>
-                <td><div class='text-center'>$".$row['amount']."</div></td>
+                <td><div class='text-center'>Tk ".$row['amount']."</div></td>
                 <td><div class='text-center'>".$row['services']."</div></td>
                 <td><div class='text-center'>".$row['plan']." Days</div></td>
                 <td><div class='text-center'><a href='edit-memberform.php?id=".$row['user_id']."'><i class='icon icon-pencil'></i> Edit</a></div></td>
