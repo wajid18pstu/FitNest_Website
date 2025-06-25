@@ -68,7 +68,7 @@ if (isset($_GET['approve_id'])) {
                     <td>".htmlspecialchars($row['fullname'])."</td>
                     <td>".htmlspecialchars($row['username'])."</td>
                     <td>".htmlspecialchars($row['contact'])."</td>
-                    <td><a href='pending-members.php?approve_id=".$row['user_id']."' class='btn btn-success btn-mini' onclick=\"return confirm('Approve this member?');\">Approve</a></td>
+                    <td><a href='pending-members.php?approve_id=".$row['user_id']."' class='btn btn-success btn-mini'>Approve</a></td>
                   </tr>";
                 }
                 ?>

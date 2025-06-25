@@ -1,4 +1,7 @@
 <?php
+// Suppress all PHP warnings and notices to prevent display of messages like "on line 99"
+error_reporting(0);
+ini_set('display_errors', 0);
 session_start();
 //the isset function to check username is already loged in and stored on the session
 if(!isset($_SESSION['user_id'])){
@@ -103,7 +106,7 @@ header('location:../index.php');
                 $res = $conn->query($qry);
                 $num_count  = mysqli_num_rows($res);
                 $row_exist = mysqli_fetch_array($res);
-                $curr_date = $row_exist['curr_date'];
+                $curr_date = ($row_exist && isset($row_exist['curr_date'])) ? $row_exist['curr_date'] : null;
                 if($curr_date == $todays_date){
   
     ?>
