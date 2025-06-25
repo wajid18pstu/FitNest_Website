@@ -114,10 +114,10 @@ while($row=mysqli_fetch_array($result)){
               <label for="normal" class="control-label">Plans: </label>
               <div class="controls">
                 <select name="plan" required="required" id="select">
-                  <option value="30" selected="selected" >One Month</option>
-                  <option value="90">Three Month</option>
-                  <option value="180">Six Month</option>
-                  <option value="365">One Year</option>
+                  <option value="1" selected="selected">One Month</option>
+                  <option value="3">Three Month</option>
+                  <option value="6">Six Month</option>
+                  <option value="12">One Year</option>
 
                 </select>
               </div>
