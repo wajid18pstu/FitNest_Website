@@ -10,5 +10,6 @@
     <li class="<?php if($page=='announcement'){ echo 'active'; }?>"><a href="announcement.php"><i class="icon icon-bullhorn"></i> <span>Announcement</span></a></li>
 
     <li class="<?php if($page=='report'){ echo 'active'; }?>"><a href="my-report.php"><i class="icon icon-file"></i> <span>Reports</span></a></li>
+    <li class="<?php if($page=='payment'){ echo 'active'; }?>"><a href="/FitNest/customer/payment.php"><i class="icon icon-money"></i> <span>Payment</span></a></li>
   </ul>
 </div>

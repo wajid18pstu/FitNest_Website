@@ -1,5 +1,101 @@
-<?php session_start();
-include('dbcon.php'); ?>
+<?php
+session_start();
+include('dbcon.php');
+// Include PHPMailer for better email reliability (optional, fallback to mail())
+require_once __DIR__ . '/includes/PHPMailer/PHPMailer.php';
+require_once __DIR__ . '/includes/PHPMailer/SMTP.php';
+require_once __DIR__ . '/includes/PHPMailer/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Handle reset action to clear OTP session
+if (isset($_GET['reset']) && $_GET['reset'] == '1') {
+    unset($_SESSION['otp']);
+    unset($_SESSION['otp_sent']);
+    unset($_SESSION['otp_user']);
+    unset($_SESSION['otp_email']);
+    header('Location: index.php');
+    exit();
+}
+
+function send_otp_email($to, $otp) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'wajid567765@gmail.com'; 
+        $mail->Password = 'gkzu qkuf rhwz cxwv';    
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('your_gmail@gmail.com', 'FitNest');
+        $mail->addAddress($to);
+        $mail->Subject = 'Your FitNest Login OTP';
+        $mail->Body = 'Your OTP for FitNest login is: ' . $otp;
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['otp_sent'])) {
+    if (!isset($_SESSION['otp_sent'])) {
+        // Step 1: Check credentials (remove email from WHERE clause)
+        $username = mysqli_real_escape_string($con, $_POST['user']);
+        $email = mysqli_real_escape_string($con, $_POST['email']);
+        $password = md5(mysqli_real_escape_string($con, $_POST['pass']));
+        $result = mysqli_query($con, "SELECT * FROM members WHERE username='$username' AND password='$password' AND status='Active'");
+        if (mysqli_num_rows($result) == 1) {
+            // Step 2: Generate OTP and send email
+            $otp = rand(100000, 999999);
+            $_SESSION['otp'] = $otp;
+            $_SESSION['otp_sent'] = true;
+            $_SESSION['otp_user'] = $username;
+            $_SESSION['otp_email'] = $email;
+            $_SESSION['otp_time'] = time();
+            send_otp_email($email, $otp);
+            $remaining = 120;
+            $otp_message = '<span id="otp_msg">OTP sent to your email.</span> <span id="otp_timer">(2m 0s)</span>';
+        } else {
+            $login_error = 'Invalid username or password.';
+        }
+    } else if (isset($_SESSION['otp_sent']) && !isset($_POST['otp'])) {
+        // Check if 120 seconds have passed since last OTP
+        $remaining = 120;
+        if (isset($_SESSION['otp_time'])) {
+            $elapsed = time() - $_SESSION['otp_time'];
+            $remaining = max(0, 120 - $elapsed);
+        }
+        if (isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time'] >= 120)) {
+            $otp = rand(100000, 999999);
+            $_SESSION['otp'] = $otp;
+            $_SESSION['otp_time'] = time();
+            $remaining = 120;
+            send_otp_email($_SESSION['otp_email'], $otp);
+            $otp_message = '<span id="otp_msg">A new OTP was sent to your email.</span> <span id="otp_timer">(2m 0s)</span>';
+        } else {
+            $otp_message = '<span id="otp_msg">OTP sent to your email.</span> <span id="otp_timer"></span>';
+        }
+    } else if (isset($_POST['otp'])) {
+        // Step 3: Verify OTP
+        if ($_POST['otp'] == $_SESSION['otp']) {
+            // Successful login
+            $_SESSION['user_id'] = $_SESSION['otp_user'];
+            unset($_SESSION['otp']);
+            unset($_SESSION['otp_sent']);
+            unset($_SESSION['otp_user']);
+            unset($_SESSION['otp_email']);
+            unset($_SESSION['otp_time']);
+            header('Location:pages/index.php');
+            exit();
+        } else {
+            $otp_error = 'Invalid OTP.';
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -24,54 +120,74 @@ include('dbcon.php'); ?>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
-                        <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" name="user" placeholder="Username" required />
+                        <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" name="user" placeholder="Username" required value="<?php echo isset($_POST['user']) ? htmlspecialchars($_POST['user']) : ''; ?>" <?php echo isset($_SESSION['otp_sent']) ? 'readonly' : ''; ?> />
                     </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
-                        <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" name="pass" placeholder="Password" required />
+                        <span class="add-on bg_ly"><i class="icon-envelope"></i></span><input type="email" name="email" placeholder="Email" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" <?php echo isset($_SESSION['otp_sent']) ? 'readonly' : ''; ?> />
                     </div>
                 </div>
             </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" name="pass" placeholder="Password" required <?php echo isset($_SESSION['otp_sent']) ? 'readonly' : ''; ?> />
+                    </div>
+                </div>
+            </div>
+            <?php if(isset($_SESSION['otp_sent'])): ?>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <span class="add-on bg_lb"><i class="icon-key"></i></span>
+                        <input type="text" name="otp" placeholder="Enter OTP from email" maxlength="6" required />
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            <?php if(isset($login_error)): ?>
+                <div class="alert alert-danger text-center" style="font-size:14px;"> <?php echo $login_error; ?> </div>
+            <?php endif; ?>
+            <?php if(isset($otp_error)): ?>
+                <div class="alert alert-danger text-center" style="font-size:14px;"> <?php echo $otp_error; ?> </div>
+            <?php endif; ?>
+            <?php if(isset($otp_message)): ?>
+                <div class="alert alert-info text-center" style="font-size:14px;"> <?php echo $otp_message; ?> </div>
+                <script>
+                    // Countdown timer for OTP (in minutes and seconds)
+                    var seconds = <?php echo isset($remaining) ? $remaining : 120; ?>;
+                    var timerElem = document.getElementById('otp_timer');
+                    var msgElem = document.getElementById('otp_msg');
+                    var timerInterval = setInterval(function() {
+                        if (timerElem) {
+                            seconds--;
+                            var min = Math.floor(seconds / 60);
+                            var sec = seconds % 60;
+                            timerElem.textContent = '(' + min + 'm ' + sec + 's)';
+                        }
+                        if (seconds <= 0) {
+                            clearInterval(timerInterval);
+                            if (msgElem) msgElem.textContent = 'A new OTP was sent to your email.';
+                            if (timerElem) timerElem.textContent = '';
+                        }
+                    }, 1000);
+                </script>
+            <?php endif; ?>
             <div class="form-actions text-center" style="margin:0; padding:0; border:none; background:none; box-shadow:none;">
-                <button type="submit" name="login" class="btn btn-success btn-large" style="width:86%;margin-bottom:0;">Customer Login</button>
+                <button type="submit" name="login" class="btn btn-success btn-large" style="width:86%;margin-bottom:0;">
+                    <?php echo isset($_SESSION['otp_sent']) ? 'Verify OTP' : 'Customer Login'; ?>
+                </button>
+                <?php if(isset($_SESSION['otp_sent'])): ?>
+                <a href="?reset=1" class="btn btn-warning btn-large" style="width:86%;margin-top:8px;">Reset Login</a>
+                <?php endif; ?>
                 <a href="#" class="flip-link btn btn-info btn-large" id="to-recover" style="width:86%;font-size:18px; margin-top:8px;">Join Now!</a>
             </div>
             <div class="g">
                 <a href="../index.php"><h6>Go Back</h6></a>
             </div>
-            
-            <?php
-            if (isset($_POST['login']))
-                {
-                    $username = mysqli_real_escape_string($con, $_POST['user']);
-                    $password = mysqli_real_escape_string($con, $_POST['pass']);
-
-                    $password = md5($password);
-                    
-                    $query 		= mysqli_query($con, "SELECT * FROM members WHERE  password='$password' and username='$username' and status='Active'");
-                    $row		= mysqli_fetch_array($query);
-                    $num_row 	= mysqli_num_rows($query);
-                    
-                    if ($num_row > 0) 
-                        {			
-                            $_SESSION['user_id']=$row['user_id'];
-                            header('location:pages/index.php');
-                            
-                        }
-                    else
-                        {
-                            echo "<div class='alert alert-danger alert-dismissible' role='alert'>
-                            Invalid Username/Password or Account has been Expired!
-                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
-                            </div>";
-                        }
-                }
-        ?>
         </form>
         <form id="recoverform" action="../customer/pages/register-cust.php" method="POST" class="form-vertical" style="display:none;">
             <p class="normal_text">Enter your details below and we will send your details for further activation process.</p>
@@ -185,22 +301,22 @@ include('dbcon.php'); ?>
 
 <style>
 #loginbox {
-  margin: 100px auto 0 auto !important;
-  padding: 1px 18px !important;
+  margin: 40px auto 0 auto !important; 
+  padding: 1px 16px !important; 
   max-width: 380px;
   min-height: unset !important;
   height: auto !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 #loginbox h3 img {
-  max-height: 150px !important;
+  max-height: 100px !important; 
   width: auto;
   display: block;
   margin: 0 auto;
   margin-bottom: 2px;
 }
 .control-group {
-  margin-bottom: 5px !important;
+  margin-bottom: 1px !important; 
 }
 #loginbox .main_input_box {
   background: none !important;
@@ -211,8 +327,9 @@ include('dbcon.php'); ?>
 }
 #loginbox .main_input_box input {
   background: #fff !important;
-  padding: 8px 10px !important;
-  height: 22px !important;
+  padding: 6px 8px !important;
+  height: 26px !important;
+  font-size: 14px !important;
 }
 #loginbox .form-actions {
   background: none !important;
@@ -222,21 +339,21 @@ include('dbcon.php'); ?>
   padding: 0 !important;
 }
 .form-actions {
-  margin-top: 8px !important;
+  margin-top: 4px !important;
   margin-bottom: 0 !important;
   padding: 0 !important;
 }
 .btn-large {
   padding: 8px 0 !important;
-  font-size: 16px !important;
+  font-size: 15px !important;
 }
 .pull-left, .pull-right {
-  margin-top: 10px !important;
+  margin-top: 6px !important;
 }
 .alert {
-  margin: 10px 0 !important;
-  padding: 8px 12px !important;
-  font-size: 14px !important;
+  margin: 6px 0 !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
 }
 </style>
 <script>

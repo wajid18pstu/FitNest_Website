@@ -39,7 +39,7 @@
         <li class="<?php if($page=='c-p-r'){ echo 'active'; }?>"><a href="progress-report.php"><i class="fas fa-arrow-right"></i> Customer Progress Report</a></li>
       </ul>
     </li>
-
+    <li class="<?php if($page=='notifications'){ echo 'active'; }?>"><a href="notifications.php"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
      
    
   </ul>
