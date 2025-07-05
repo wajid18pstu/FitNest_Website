@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +32,10 @@
 <?php
     include 'dbcon.php';
     include "session.php";
-    // $id=$_GET['id'];
-    $qry= "select * from members WHERE user_id='".$_SESSION['user_id']."'";
+    if (!isset($_SESSION['user_id'])) {
+        die("Username not set in session.");
+    }
+    $qry= "select * from members WHERE username='".$_SESSION['user_id']."'";
     $result=mysqli_query($con,$qry);
     while($row=mysqli_fetch_array($result)){
 ?> 
