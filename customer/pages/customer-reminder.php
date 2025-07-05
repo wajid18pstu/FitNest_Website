@@ -67,32 +67,25 @@ header('location:../index.php');
 	  <?php
 
       include "dbcon.php";
-      $qry="SELECT reminder FROM members WHERE user_id='".$_SESSION['user_id']."'";
+      $qry="SELECT reminder FROM members WHERE username='".$_SESSION['user_id']."'";
       $cnt = 1;
-        $result=mysqli_query($con,$qry);
+      $result=mysqli_query($con,$qry);
 
-        
-         
-              
-            while($row=mysqli_fetch_array($result)){ ?>
-
-
-              <?php if($row['reminder'] == '1') { ?>
-            
+        if ($row = mysqli_fetch_array($result)) {
+            if($row['reminder'] == '1') { ?>
                 <div class="alert alert-danger" role="alert">
                 <h4 class="alert-heading">ALERT</h4>
-                <p>This is to notify you that your current membership program is going to expire soon. Please clear up your payments before your due dates. <br>IT IS IMPORTANT THAT YOU CLEAR YOUR DUES ON TIME IN ORDER TO AVOID SERVICE DISRUPTIONS.</p>
-                <hr>
-                <p class="mb-0">We value you as our customer and look forward to continue serving you in the future.</p>
-              </div>
-
-              <?php } else { ?>
-
+                <p>Your membership is expiring soon. Please pay your dues.</p>
+                </div>
+            <?php } else { ?>
                 <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading">NO REMINDERS YET!</h4>
-              </div>
-
-                <?php } }?>
+                </div>
+            <?php }
+        } else {
+            echo '<div style="color:red;">[DEBUG] No member found for this user_id.</div>';
+        }
+        ?>
 
     
      </div>
